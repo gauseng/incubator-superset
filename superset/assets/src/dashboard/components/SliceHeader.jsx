@@ -20,6 +20,7 @@ const propTypes = {
   forceRefresh: PropTypes.func,
   exploreChart: PropTypes.func,
   exportCSV: PropTypes.func,
+  exportPNG: PropTypes.func,
   editMode: PropTypes.bool,
   annotationQuery: PropTypes.object,
   annotationError: PropTypes.object,
@@ -32,6 +33,7 @@ const defaultProps = {
   toggleExpandSlice: () => ({}),
   exploreChart: () => ({}),
   exportCSV: () => ({}),
+  exportPNG: () => ({}),
   editMode: false,
 };
 
@@ -42,6 +44,7 @@ class SliceHeader extends React.PureComponent {
     this.onSaveTitle = this.onSaveTitle.bind(this);
     this.onToggleExpandSlice = this.onToggleExpandSlice.bind(this);
     this.exportCSV = this.props.exportCSV.bind(this, this.props.slice);
+    this.exportPNG = this.props.exportPNG.bind(this, this.props.slice);
     this.exploreChart = this.props.exploreChart.bind(this, this.props.slice);
     this.forceRefresh = this.props.forceRefresh.bind(this, this.props.slice.slice_id);
     this.removeSlice = this.props.removeSlice.bind(this, this.props.slice);
@@ -148,6 +151,15 @@ class SliceHeader extends React.PureComponent {
                   tooltip={t('Export CSV')}
                 >
                   <i className="fa fa-table" />
+                </TooltipWrapper>
+              </a>
+              <a className={`exportPNG`} onClick={this.exportPNG}>
+                <TooltipWrapper
+                  placement="top"
+                  label="exportPNG"
+                  tooltip={t('Download chart as PNG')}
+                >
+                  <i className="fa fa-download" />
                 </TooltipWrapper>
               </a>
               {this.props.supersetCanExplore &&

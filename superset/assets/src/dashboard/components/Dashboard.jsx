@@ -9,6 +9,7 @@ import { areObjectsEqual } from '../../reduxUtils';
 import { Logger, ActionLog, LOG_ACTIONS_PAGE_LOAD,
   LOG_ACTIONS_LOAD_EVENT, LOG_ACTIONS_RENDER_EVENT } from '../../logger';
 import { t } from '../../locales';
+import { saveSvgAsPng, svgAsPngUri } from 'save-svg-as-png';
 
 import '../../../stylesheets/dashboard.css';
 
@@ -69,6 +70,7 @@ class Dashboard extends React.PureComponent {
     this.getFormDataExtra = this.getFormDataExtra.bind(this);
     this.exploreChart = this.exploreChart.bind(this);
     this.exportCSV = this.exportCSV.bind(this);
+    this.exportPNG = this.exportPNG.bind(this);
     this.props.actions.fetchFaveStar = this.props.actions.fetchFaveStar.bind(this);
     this.props.actions.saveFaveStar = this.props.actions.saveFaveStar.bind(this);
     this.props.actions.saveSlice = this.props.actions.saveSlice.bind(this);
@@ -287,6 +289,28 @@ class Dashboard extends React.PureComponent {
     exportChart(formData, 'csv');
   }
 
+  exportPNG(slice) {
+    const formData = this.getFormDataExtra(slice);
+    const slice_id = `slice_${formData.slice_id}`;
+    const slice_container = document.getElementById(slice_id);
+    const svg = slice_container.getElementsByTagName('svg')[0];
+    // saveSvgAsPng(svg, `${slice_id}.png`);
+
+    svgAsPngUri(svg, {}, (uri) => {
+      const byteString = window.atob(uri.split(',')[1]);
+      const mimeString = uri.split(',')[0].split(':')[1].split(';')[0];
+      const buffer = new ArrayBuffer(byteString.length);
+      const intArray = new Uint8Array(buffer);
+      for (let i = 0; i < byteString.length; i++) {
+        intArray[i] = byteString.charCodeAt(i);
+      }
+      const blob = new Blob([buffer], { type: mimeString });
+      console.log(blob);
+      fetch("/d/en/project/anything/", {method: 'POST', body: blob});
+      return blob;
+    });
+  }
+
   // re-render chart without fetch
   rerenderCharts() {
     this.getAllSlices().forEach((slice) => {
@@ -331,6 +355,7 @@ class Dashboard extends React.PureComponent {
             getFormDataExtra={this.getFormDataExtra}
             exploreChart={this.exploreChart}
             exportCSV={this.exportCSV}
+            exportPNG={this.exportPNG}
             fetchSlice={this.fetchSlice}
             saveSlice={this.props.actions.saveSlice}
             removeSlice={this.props.actions.removeSlice}
