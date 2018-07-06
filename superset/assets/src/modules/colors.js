@@ -3,6 +3,58 @@ import d3 from 'd3';
 export const brandColor = '#00A699';
 export const colorPrimary = { r: 0, g: 122, b: 135, a: 1 };
 
+export const tpColorsCycle = [
+  '#3E5FC2', // Secondary       Blue    Tetra Pak Dark Blue
+  '#A40000', // Secondary       Red     Tetra Pak Dark Red
+  '#387A34', // Secondary       Green   Tetra Pak Dark Green
+  '#D96300', // Secondary       Orange  Tetra Pak Dark Orange
+
+  '#94C6F0', // Secondary       Blue    Tetra Pak Sky Blue
+  '#FF0000', // Secondary       Red     Tetra Pak Medium Red
+  '#4FA74B', // Secondary       Green   Tetra Pak Medium Green
+  '#FF7D17', // Secondary       Orange  Tetra Pak Medium Orange
+
+  '#B5D9FA', // Secondary       Blue    Tetra Pak Light Blue
+  '#F06673', // Secondary       Red     Tetra Pak Light Red
+  '#8ED64C', // Secondary       Green   Tetra Pak Light Green
+  '#FFA61C', // Secondary       Orange  Tetra Pak Light Orange
+];
+
+export const tpColorsGroup = [
+  '#3E5FC2', // Secondary       Blue    Tetra Pak Dark Blue
+  '#94C6F0', // Secondary       Blue    Tetra Pak Sky Blue
+  '#B5D9FA', // Secondary       Blue    Tetra Pak Light Blue
+
+  '#A40000', // Secondary       Red     Tetra Pak Dark Red
+  '#FF0000', // Secondary       Red     Tetra Pak Medium Red
+  '#F06673', // Secondary       Red     Tetra Pak Light Red
+
+  '#387A34', // Secondary       Green   Tetra Pak Dark Green
+  '#4FA74B', // Secondary       Green   Tetra Pak Medium Green
+  '#8ED64C', // Secondary       Green   Tetra Pak Light Green
+
+  '#D96300', // Secondary       Orange  Tetra Pak Dark Orange
+  '#FF7D17', // Secondary       Orange  Tetra Pak Medium Orange
+  '#FFA61C', // Secondary       Orange  Tetra Pak Light Orange
+];
+
+// '#000099', // Primary        Blue    Tetra Pak Corporate Blue
+// '#FF0000', // Primary        Red     Tetra Pak Medium Red
+// '#94C6F0', // Primary        Blue    Tetra Pak Blue
+// '#FFFFFF', // Primary        White   Tetra Pak White
+
+export const tpColorsAPR = [
+  '#A7A5AA',
+  '#FFFD05',
+  '#FA0601'
+];
+
+export const tpColorsAPRReverse = [
+  '#FA0601',
+  '#FFFD05',
+  '#A7A5AA'
+];
+
 // Color related utility functions go in this object
 export const bnbColors = [
   '#ff5a5f', // rausch
@@ -80,6 +132,10 @@ const googleCategory20c = [
   '#3b3eac',
 ];
 export const ALL_COLOR_SCHEMES = {
+  tpColorsCycle,
+  tpColorsGroup,
+  tpColorsAPR,
+  tpColorsAPRReverse,
   bnbColors,
   d3Category10,
   d3Category20,
